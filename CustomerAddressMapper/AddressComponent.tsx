@@ -1,5 +1,9 @@
+import { IStackItemStyles, IStackStyles, IStackTokens, Stack, StackItem } from '@fluentui/react';
 import * as React from 'react';
-import { AddressFieldSchemaName, DynamicsEntity } from './Models/EntityModel';
+import ButtonComponent from './ButtonComponent';
+import { AddressFieldSchemaName, 
+  DynamicsEntity } from './Models/EntityModel';
+import { initializeIcons } from '@fluentui/font-icons-mdl2';
 
 export interface IAddressComponentProps {
     parentEntity : DynamicsEntity
@@ -8,12 +12,26 @@ export interface IAddressComponentProps {
     showButton : boolean
 }
 
-const setAddressField = () =>{
-    
+const stackStyles : IStackStyles = {
+}
+
+const stackTokens : IStackTokens = {
+
 }
 
 export const AddressComponent: React.FunctionComponent<IAddressComponentProps> = (props) => {
-  return  null;
+  initializeIcons();
+  
+  const setAddressFromParent = async() =>{
+    console.log("called");
+  }
+  return  (
+    <Stack styles={stackStyles} tokens={stackTokens}> 
+      {props.showButton ?  
+        <ButtonComponent setAddressField={setAddressFromParent}></ButtonComponent>
+      : null}      
+    </Stack>
+  );
 };
 
 
