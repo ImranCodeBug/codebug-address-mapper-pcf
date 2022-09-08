@@ -1,6 +1,7 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import { HelloWorld, IHelloWorldProps } from "./HelloWorld";
 import * as React from "react";
+import { AddressFieldSchemaName, DynamicsEntity } from "./Models/EntityModel";
+import {AddressComponent, IAddressComponentProps } from "./AddressComponent";
 
 export class CustomerAddressMapper implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
@@ -32,11 +33,36 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
      * @returns ReactElement root react element for the control
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
-        
-        const props: IHelloWorldProps = { name: 'Hello, World!' };
-        return React.createElement(
-            HelloWorld, props
-        );
+        console.log(context);
+        const props : IAddressComponentProps = this.ConstructProps(context);
+        return React.createElement(AddressComponent, props);
+    }
+
+    private ConstructProps = (context : ComponentFramework.Context<IInputs>) =>{
+        const parentEntity : DynamicsEntity = {
+            entityLogicalName : 'lead',
+            entityId : '42416478-bc04-4d16-9f92-26bc3296b6a0'
+        };
+
+        const childEntity : DynamicsEntity = {
+            entityLogicalName  : 'dummyEntity',
+            entityId : 'e7487b03-48ba-45f1-b231-54f2ab0b64dc'
+        };
+
+        const addressFields : AddressFieldSchemaName = {
+            line1 : 'line1_field',
+            line2 : 'line2_field',
+            line3 : 'line3_field',
+            city : 'city_field',
+            postcode : 'postcode_field',
+            country : 'country_field'
+        }
+        return {
+            parentEntity : parentEntity,
+            childEntity : childEntity,
+            addressFieldMaps : addressFields,
+            showButton : true
+        }
     }
 
     /**
