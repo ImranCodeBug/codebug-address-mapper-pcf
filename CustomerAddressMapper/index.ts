@@ -1,7 +1,8 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import * as React from "react";
-import { AddressFieldSchemaName, DynamicsEntity } from "./Models/EntityModel";
+import { AddressMap, DynamicsEntity } from "./Models/EntityModel";
 import {AddressComponent, IAddressComponentProps } from "./AddressComponent";
+import { EntityRepository } from "./Repositories/EntityRepository";
 
 export class CustomerAddressMapper implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
@@ -32,37 +33,69 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
      * @param context The entire property bag available to control via Context Object; It contains values as set up by the customizer mapped to names defined in the manifest, as well as utility functions
      * @returns ReactElement root react element for the control
      */
-    public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
-        console.log(context);
+    public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {        
         const props : IAddressComponentProps = this.ConstructProps(context);
         return React.createElement(AddressComponent, props);
     }
 
     private ConstructProps = (context : ComponentFramework.Context<IInputs>) =>{
+        const entityRepository = new EntityRepository(context.webAPI)
+
         const parentEntity : DynamicsEntity = {
-            entityLogicalName : 'lead',
-            entityId : '42416478-bc04-4d16-9f92-26bc3296b6a0'
+            entityLogicalName : (<any>context).parameters.Customer.raw[0].LogicalName,
+            entityId : (<any>context).parameters.Customer.raw[0].Id._formattedGuid
         };
 
         const childEntity : DynamicsEntity = {
-            entityLogicalName  : 'dummyEntity',
-            entityId : 'e7487b03-48ba-45f1-b231-54f2ab0b64dc'
+            entityLogicalName  : (<any>context).page.entityTypeName,
+            entityId : (<any>context).page.entityId
         };
 
-        const addressFields : AddressFieldSchemaName = {
-            line1 : 'line1_field',
-            line2 : 'line2_field',
-            line3 : 'line3_field',
-            city : 'city_field',
-            postcode : 'postcode_field',
-            country : 'country_field'
-        }
         return {
             parentEntity : parentEntity,
             childEntity : childEntity,
-            addressFieldMaps : addressFields,
-            showButton : true
+            addressFieldMaps : this.ConstructAddressMapFromContext(context),
+            showButton : true,
+            entityRepository : entityRepository
         }
+    }
+
+    private ConstructAddressMapFromContext = (context : ComponentFramework.Context<IInputs>) =>{
+        const addressFieldMaps : AddressMap = {}
+
+        if(context.parameters.Street1.raw){
+            addressFieldMaps.line1 = {schemaName : context.parameters.Street1.raw}
+        }
+
+        if(context.parameters.Street2.raw){
+            addressFieldMaps.line2 = {schemaName : context.parameters.Street2.raw}
+        }
+
+        if(context.parameters.Street3.raw){
+            addressFieldMaps.line3 = {schemaName : context.parameters.Street3.raw}
+        }
+
+        if(context.parameters.Postcode.raw){
+            addressFieldMaps.postcode = {schemaName : context.parameters.Postcode.raw}
+        }
+
+        if(context.parameters.County.raw){
+            addressFieldMaps.county = {schemaName : context.parameters.County.raw}
+        }
+
+        if(context.parameters.City.raw){
+            addressFieldMaps.city = {schemaName : context.parameters.City.raw}
+        }
+
+        if(context.parameters.Province.raw){
+            addressFieldMaps.province = {schemaName : context.parameters.Province.raw}
+        }
+
+        if(context.parameters.Country.raw){
+            addressFieldMaps.country = {schemaName : context.parameters.Country.raw}
+        }
+
+        return addressFieldMaps
     }
 
     /**

@@ -1,16 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest>
   <control namespace="Codebug" constructor="CustomerAddressMapper" version="0.0.1" display-name-key="CustomerAddressMapper" description-key="CustomerAddressMapper description" control-type="virtual">
-    <!--external-service-usage node declares whether this 3rd party PCF control is using external service or not, if yes, this control will be considered as premium and please also add the external domain it is using.
-    If it is not using any external service, please set the enabled="false" and DO NOT add any domain below. The "enabled" will be false by default.
-    Example1:
-      <external-service-usage enabled="true">
-        <domain>www.Microsoft.com</domain>
-      </external-service-usage>
-    Example2:
-      <external-service-usage enabled="false">
-      </external-service-usage>
-    -->
+    
     <external-service-usage enabled="false">
       <!--UNCOMMENT TO ADD EXTERNAL DOMAINS
       <domain></domain>
@@ -27,8 +18,45 @@
       of-type="Enum" usage="input" required="true">
       <value name="Yes" display-name-key="Show Button" description-key="Shows a button to trigger the pull" default="true">yes</value>
       <value name="No" display-name-key="Do not show button" description-key="Does not show any button" >no</value>
+      </property>    
 
-      </property>
+    <property name="ButtonLabel" display-name-key="Button Label" 
+    description-key="Label in the button" 
+    of-type="SingleLine.Text" usage="input" required="false" />
+
+    <property name="Street1" display-name-key="Street 1" 
+    description-key="Schema name of the child entities Street 1 field" 
+    of-type="SingleLine.Text" usage="input" required="false" />
+
+    <property name="Street2" display-name-key="Street 2" 
+    description-key="Schema name of the child entities Street 2 field" 
+    of-type="SingleLine.Text" usage="input" required="false" />
+
+    <property name="Street3" display-name-key="Street 3" 
+    description-key="Schema name of the child entities Street 3 field" 
+    of-type="SingleLine.Text" usage="input" required="false" />
+
+    <property name="Postcode" display-name-key="Postcode" 
+    description-key="Schema name of the child entities Postcode field" 
+    of-type="SingleLine.Text" usage="input" required="false" />
+
+    <property name="City" display-name-key="City" 
+    description-key="Schema name of the child entities City field" 
+    of-type="SingleLine.Text" usage="input" required="false" />
+
+    <property name="County" display-name-key="County" 
+    description-key="Schema name of the child entities County field" 
+    of-type="SingleLine.Text" usage="input" required="false" />
+
+    <property name="Province" display-name-key="Province" 
+    description-key="Schema name of the child entities Province field" 
+    of-type="SingleLine.Text" usage="input" required="false" />
+
+    <property name="Country" display-name-key="Country" 
+    description-key="Schema name of the child entities Country field" 
+    of-type="SingleLine.Text" usage="input" required="false" />
+
+
     <!--
       Property node's of-type attribute can be of-type-group attribute.
       Example:
