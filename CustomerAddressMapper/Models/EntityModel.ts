@@ -14,7 +14,6 @@ export type AddressMap = {
     country? : AddressPart
 }
 
-
 export type AddressPart = {
     schemaName : string,
     value? : string
