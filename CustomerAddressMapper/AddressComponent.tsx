@@ -33,10 +33,10 @@ export const AddressComponent: React.FunctionComponent<IAddressComponentProps> =
 
   const setAddressFromParent = async () => {
     
-    setIsRunning(ResponseStatus.Error);
+    setIsRunning(ResponseStatus.Running);
     
-    //const response = await entityRepository.GetAddressValueFromParent(parentEntity)
-    //setIsRunning(ResponseStatus.Completed)
+    const response = await entityRepository.GetAddressValueFromParent(parentEntity)
+    setIsRunning(ResponseStatus.Completed)
   }
   return (
     <Stack styles={stackStyles} tokens={stackTokens}>

@@ -44,8 +44,8 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
 
         const parentEntity : DynamicsEntity = {
             entityLogicalName : (<any>context).parameters.Customer.raw[0].LogicalName,
-            //entityId : (<any>context).parameters.Customer.raw[0].Id._formattedGuid
-            entityId : '39269c3e-a55d-4eae-ae8d-3091818562d6'
+            entityId : (<any>context).parameters.Customer.raw[0].Id._formattedGuid
+            //entityId : '39269c3e-a55d-4eae-ae8d-3091818562d6'
         };
 
         const childEntity : DynamicsEntity = {
