@@ -7,7 +7,8 @@
     "clean": "pcf-scripts clean",
     "rebuild": "pcf-scripts rebuild",
     "start": "pcf-scripts start",
-    "refreshTypes": "pcf-scripts refreshTypes"
+    "refreshTypes": "pcf-scripts refreshTypes",
+    "test" : "jest"
   },
   "dependencies": {
     "@fluentui/react": "8.29.0",
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.19.1",
     "@babel/preset-react": "^7.18.6",
+    "@types/jest": "^29.0.3",
     "@types/node": "^16.4.10",
     "@types/powerapps-component-framework": "^1.3.0",
     "@types/react": "^16.8",
@@ -32,6 +34,7 @@
     "pcf-scripts": "^1",
     "pcf-start": "^1",
     "react-test-renderer": "^16.8.6",
+    "ts-jest": "^29.0.1",
     "typescript": "^4.3"
   }
 }
