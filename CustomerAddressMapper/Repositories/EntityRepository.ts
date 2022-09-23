@@ -1,9 +1,11 @@
+import { copyFile } from "fs";
 import { DynamicsEntity, AddressMap } from "../Models/EntityModel";
 import { QueryReponse, ResponseStatus } from "../Models/ResponseModel";
 import { IEntityRepository } from "./IEntityRepository";
 
 export class EntityRepository implements IEntityRepository{
     constructor(private readonly _webApi : ComponentFramework.WebApi, private readonly _fieldMap : AddressMap){}
+    
     GetAddressValueFromParent = async(parentRecord: DynamicsEntity ) => {        
         return await this._webApi.retrieveRecord(parentRecord.entityLogicalName, parentRecord.entityId, "?$select=address1_county,address1_line3,address1_postalcode,address1_stateorprovince,address1_city,address1_line1,address1_country,address1_line2")
             .then(response => {
@@ -15,6 +17,7 @@ export class EntityRepository implements IEntityRepository{
                 return result
             })
             .catch((error : any) => {
+                console.error(error);
                 const result : QueryReponse = {
                     status : ResponseStatus.Error,
                     errorText : error.message
@@ -38,23 +41,23 @@ export class EntityRepository implements IEntityRepository{
         }
 
         if(this._fieldMap.postcode){
-            this._fieldMap.postcode.value = result.postcode
+            this._fieldMap.postcode.value = result.address1_postalcode
         }
 
         if(this._fieldMap.city){
-            this._fieldMap.city.value = result.city
+            this._fieldMap.city.value = result.address1_city
         }
 
         if(this._fieldMap.county){
-            this._fieldMap.county.value = result.county
+            this._fieldMap.county.value = result.address1_county
         }
 
         if(this._fieldMap.province){
-            this._fieldMap.province.value = result.province
+            this._fieldMap.province.value = result.address1_stateorprovince
         }
 
         if(this._fieldMap.country){
-            this._fieldMap.country.value = result.country
+            this._fieldMap.country.value = result.address1_country
         }
     }
 }

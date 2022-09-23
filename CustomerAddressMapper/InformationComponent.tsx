@@ -18,8 +18,7 @@ const stackItemToken : IStackItemTokens = {
 }
 
 
-const getIconDetails = (queryStatus : ResponseStatus) => {
-    console.log(queryStatus)
+const getIconDetails = (queryStatus : ResponseStatus) => {    
     switch (queryStatus){
         case ResponseStatus.Error : {
             return {
