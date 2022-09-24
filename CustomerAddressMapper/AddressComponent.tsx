@@ -27,15 +27,14 @@ export const AddressComponent: React.FunctionComponent<IAddressComponentProps> =
 
   const [queryStatus, setIsRunning] = useState<ResponseStatus | null>(null)
 
-  const { parentEntity, childEntity, showButton, entityRepository } = props
-
-  
+  const { parentEntity, childEntity, showButton, entityRepository } = props  
 
   const setAddressFromParent = async () => {
     
     setIsRunning(ResponseStatus.Running);
     
     const response = await entityRepository.GetAddressValueFromParent(parentEntity)
+    const response1 = await entityRepository.SetAddressValueInChild(childEntity);
     setIsRunning(ResponseStatus.Completed)
   }
   return (
