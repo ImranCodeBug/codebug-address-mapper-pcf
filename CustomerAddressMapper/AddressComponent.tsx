@@ -4,7 +4,7 @@ import ButtonComponent from './ButtonComponent';
 import { DynamicsEntity } from './Models/EntityModel';
 import { initializeIcons } from '@fluentui/font-icons-mdl2';
 import { IEntityRepository } from './Repositories/IEntityRepository';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InformationComponent from './InformationComponent';
 import { ResponseStatus } from './Models/ResponseModel';
 
@@ -28,6 +28,15 @@ export const AddressComponent: React.FunctionComponent<IAddressComponentProps> =
   const [queryStatus, setIsRunning] = useState<ResponseStatus | null>(null)
 
   const { parentEntity, childEntity, showButton, entityRepository } = props  
+
+  useEffect(() =>{
+    const executeSetAddressFromParent = async() =>{
+      if(!showButton){
+        await setAddressFromParent();
+      }
+    }
+    executeSetAddressFromParent();
+  }, [parentEntity, showButton])
 
   const setAddressFromParent = async () => {
     
