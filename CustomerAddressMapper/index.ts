@@ -56,7 +56,7 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
         return {
             parentEntity : parentEntity,
             childEntity : childEntity,            
-            showButton : true,
+            showButton : (context.parameters.ShowButton.raw === 'yes'),
             entityRepository : entityRepository
         }
     }
