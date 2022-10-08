@@ -13,12 +13,22 @@
     description-key="Bind the customer field from which the address fields will be brought" 
     of-type="Lookup.Customer" usage="bound" required="true" />
 
+    <property name="BoundTest" display-name-key="Bound Field" 
+    description-key="Bound Field" 
+    of-type="SingleLine.Text" usage="output" required="false" />
+
+
     <property name="ShowButton" display-name-key="Trigger From Button" 
       description-key="Show button to pull the address" 
       of-type="Enum" usage="input" required="true">
       <value name="Yes" display-name-key="Show Button" description-key="Shows a button to trigger the pull" default="true">yes</value>
       <value name="No" display-name-key="Do not show button" description-key="Does not show any button" >no</value>
       </property>    
+
+    <property name="BoundTest" display-name-key="Bound Field" 
+    description-key="Bound Field" 
+    of-type="SingleLine.Text" usage="output" required="false" />
+
 
     <property name="ButtonLabel" display-name-key="Button Label" 
     description-key="Label in the button" 

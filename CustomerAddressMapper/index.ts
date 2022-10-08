@@ -7,11 +7,13 @@ import { EntityRepository } from "./Repositories/EntityRepository";
 export class CustomerAddressMapper implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
     private notifyOutputChanged: () => void;
+    public _boundField : string;
 
     /**
      * Empty constructor.
      */
-    constructor() { }
+    constructor() {         
+    }
 
     /**
      * Used to initialize the control instance. Controls can kick off remote server calls and other initialization actions here.
@@ -57,7 +59,9 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
             parentEntity : parentEntity,
             childEntity : childEntity,            
             showButton : (context.parameters.ShowButton.raw === 'yes'),
-            entityRepository : entityRepository
+            entityRepository : entityRepository,            
+            customerAddressMapper : this,
+            doSomething : this.doSomething
         }
     }
 
@@ -99,12 +103,22 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
         return addressFieldMaps
     }
 
+
+    public doSomething = (bdFiled : string) :void => {
+        console.log(bdFiled)
+        debugger;
+        this._boundField = bdFiled;
+        this.notifyOutputChanged();
+    }
     /**
      * It is called by the framework prior to a control receiving new data.
      * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
      */
     public getOutputs(): IOutputs {
-        return { };
+        
+        return {
+            BoundTest : this._boundField
+         };
     }
 
     /**

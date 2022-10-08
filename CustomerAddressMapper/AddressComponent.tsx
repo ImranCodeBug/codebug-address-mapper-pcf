@@ -7,12 +7,15 @@ import { IEntityRepository } from './Repositories/IEntityRepository';
 import { useEffect, useState } from 'react';
 import InformationComponent from './InformationComponent';
 import { ResponseStatus } from './Models/ResponseModel';
+import { CustomerAddressMapper } from '.';
 
 export interface IAddressComponentProps {
   parentEntity: DynamicsEntity
   childEntity: DynamicsEntity
   showButton: boolean,
-  entityRepository: IEntityRepository
+  entityRepository: IEntityRepository, 
+  customerAddressMapper : CustomerAddressMapper,
+  doSomething : (bdFiled : string) => void
 }
 
 const stackStyles: IStackStyles = {
@@ -27,9 +30,10 @@ export const AddressComponent: React.FunctionComponent<IAddressComponentProps> =
 
   const [queryStatus, setIsRunning] = useState<ResponseStatus | null>(null)
 
-  const { parentEntity, childEntity, showButton, entityRepository } = props  
+  const { parentEntity, childEntity, showButton, entityRepository, 
+    customerAddressMapper, doSomething } = props  
 
-  useEffect(() =>{
+  useEffect(() =>{    
     const executeSetAddressFromParent = async() =>{
       if(!showButton){
         await setAddressFromParent();
@@ -38,8 +42,10 @@ export const AddressComponent: React.FunctionComponent<IAddressComponentProps> =
     executeSetAddressFromParent();
   }, [parentEntity, showButton])
 
-  const setAddressFromParent = async () => {
-    
+  const setAddressFromParent = async () => {       
+    doSomething("Kai")
+    //customerAddressMapper.doSomething("hello");
+
     setIsRunning(ResponseStatus.Running);
     
     const response = await entityRepository.GetAddressValueFromParent(parentEntity)
