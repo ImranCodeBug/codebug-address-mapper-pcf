@@ -105,21 +105,11 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
 
 
     public doSomething = (bdFiled : string) :void => {
-        console.log(bdFiled)
-        debugger;
+        console.log(bdFiled)        
         this._boundField = bdFiled;
         this.notifyOutputChanged();
     }
-    /**
-     * It is called by the framework prior to a control receiving new data.
-     * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
-     */
-    public getOutputs(): IOutputs {
-        
-        return {
-            BoundTest : this._boundField
-         };
-    }
+    
 
     /**
      * Called when the control is to be removed from the DOM tree. Controls should use this call for cleanup.

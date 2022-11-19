@@ -46,11 +46,10 @@ export const AddressComponent: React.FunctionComponent<IAddressComponentProps> =
     doSomething("Kai")
     //customerAddressMapper.doSomething("hello");
 
-    setIsRunning(ResponseStatus.Running);
-    
-    const response = await entityRepository.GetAddressValueFromParent(parentEntity)
-    const response1 = await entityRepository.SetAddressValueInChild(childEntity);
-    setIsRunning(ResponseStatus.Completed)
+    // setIsRunning(ResponseStatus.Running);    
+    // const response = await entityRepository.GetAddressValueFromParent(parentEntity)
+    // const response1 = await entityRepository.SetAddressValueInChild(childEntity);
+    // setIsRunning(ResponseStatus.Completed)
   }
   return (
     <Stack styles={stackStyles} tokens={stackTokens}>
