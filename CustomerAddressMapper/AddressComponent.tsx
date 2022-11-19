@@ -2,20 +2,18 @@ import { IStackStyles, IStackTokens, Stack } from '@fluentui/react';
 import * as React from 'react';
 import ButtonComponent from './ButtonComponent';
 import { DynamicsEntity } from './Models/EntityModel';
-import { initializeIcons } from '@fluentui/font-icons-mdl2';
 import { IEntityRepository } from './Repositories/IEntityRepository';
 import { useEffect, useState } from 'react';
 import InformationComponent from './InformationComponent';
 import { ResponseStatus } from './Models/ResponseModel';
-import { CustomerAddressMapper } from '.';
+
 
 export interface IAddressComponentProps {
-  parentEntity: DynamicsEntity
-  childEntity: DynamicsEntity
+  parentEntity: DynamicsEntity  
   showButton: boolean,
   entityRepository: IEntityRepository, 
-  customerAddressMapper : CustomerAddressMapper,
-  doSomething : (bdFiled : string) => void
+  
+ 
 }
 
 const stackStyles: IStackStyles = {
@@ -26,12 +24,11 @@ const stackTokens: IStackTokens = {
 }
 
 export const AddressComponent: React.FunctionComponent<IAddressComponentProps> = (props) => {
-  initializeIcons();
+  
 
   const [queryStatus, setIsRunning] = useState<ResponseStatus | null>(null)
 
-  const { parentEntity, childEntity, showButton, entityRepository, 
-    customerAddressMapper, doSomething } = props  
+  const { parentEntity, showButton, entityRepository, } = props  
 
   useEffect(() =>{    
     const executeSetAddressFromParent = async() =>{
@@ -43,7 +40,7 @@ export const AddressComponent: React.FunctionComponent<IAddressComponentProps> =
   }, [parentEntity, showButton])
 
   const setAddressFromParent = async () => {       
-    doSomething("Kai")
+    //doSomething("Kai")
     //customerAddressMapper.doSomething("hello");
 
     // setIsRunning(ResponseStatus.Running);    
