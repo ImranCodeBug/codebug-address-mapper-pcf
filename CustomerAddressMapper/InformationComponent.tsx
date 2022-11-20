@@ -7,16 +7,13 @@ export interface IInformationComponentProps {
     queryStatus : ResponseStatus
 }
 
-
-
-const stackItemStyles : IStackItemStyles = {
-    
+const stackItemStyles : IStackItemStyles = {    
     
 }
 
 const stackItemToken : IStackItemTokens = {
-}
 
+}
 
 const getIconDetails = (queryStatus : ResponseStatus) => {    
     switch (queryStatus){
@@ -57,9 +54,6 @@ const InformationComponent = (props: IInformationComponentProps) => {
         </div>
     </StackItem>    
   )
-
-    
-  
 }
 
 export default InformationComponent

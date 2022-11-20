@@ -1,4 +1,4 @@
-import { AddressMap, DynamicsEntity } from "../../Models/EntityModel";
+import { DynamicsEntity } from "../../Models/EntityModel";
 import { EntityRepository } from "../../Repositories/EntityRepository";
 import {describe, expect, test} from '@jest/globals';
 import { ResponseStatus } from "../../Models/ResponseModel";
@@ -6,7 +6,7 @@ import { ResponseStatus } from "../../Models/ResponseModel";
 
 describe('Entity Repository', () =>{
     let _webApi : ComponentFramework.WebApi;
-    let _fieldMap : AddressMap;    
+    
     let _parentEntity : DynamicsEntity ={
         entityLogicalName : 'contact',
         entityId : '39269c3e-a55d-4eae-ae8d-3091818562d6'
@@ -31,17 +31,7 @@ describe('Entity Repository', () =>{
     }
 
     beforeAll(() => {
-        _fieldMap = {
-            line1 : {schemaName : 'line1'},
-            line2 : {schemaName : 'line2'},
-            line3 : {schemaName : 'line3'},
-            postcode : {schemaName : 'postcode'},
-            county : {schemaName : 'county'},
-            country : {schemaName : 'country'},
-            city : {schemaName : 'city'},
-            province : {schemaName : 'province'}
-        };
-
+    
         _webApi = {
             createRecord : jest.fn(),
             deleteRecord : jest.fn(),
@@ -53,7 +43,7 @@ describe('Entity Repository', () =>{
     })
 
     test('initialized', () =>{
-        let entityRepository = new EntityRepository(_webApi, _fieldMap);
+        let entityRepository = new EntityRepository(_webApi);
         expect(entityRepository).toBeDefined();
     })
 
@@ -61,28 +51,21 @@ describe('Entity Repository', () =>{
         _webApi.retrieveRecord = jest.fn(
             () => Promise.resolve(_entityResponse));
 
-        let entityRepository = new EntityRepository(_webApi, _fieldMap);
+        let entityRepository = new EntityRepository(_webApi);
 
         var response = await entityRepository.GetAddressValueFromParent(_parentEntity);
 
-        
         expect(response.status).toBe(ResponseStatus.Success);
-        expect(_fieldMap.county).toBeDefined();        
-        expect(_fieldMap.postcode).toBeDefined();
-        expect(_fieldMap.city).toBeDefined();
-        expect(_fieldMap.line1).toBeDefined();
-        expect(_fieldMap.country).toBeDefined();
-        expect(_fieldMap.line2).toBeDefined();
+        expect(response.address).toBeDefined()        
     })
 
     test('When it fails to execute it will have an error', async() => {
         _webApi.retrieveRecord = jest.fn(
             () => Promise.reject(_errorResponse));
 
-        let entityRepository = new EntityRepository(_webApi, _fieldMap);
+        let entityRepository = new EntityRepository(_webApi,);
 
         var response = await entityRepository.GetAddressValueFromParent(_parentEntity);
-
         
         expect(response.status).toBe(ResponseStatus.Error);        
     })

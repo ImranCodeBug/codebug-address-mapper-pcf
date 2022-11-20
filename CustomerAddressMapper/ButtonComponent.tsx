@@ -1,6 +1,5 @@
 import { DefaultButton, IIconProps, IStackItemStyles, Spinner, SpinnerSize, StackItem } from '@fluentui/react';
 import * as React from 'react';
-import { ResponseStatus } from './Models/ResponseModel';
 
 interface IButtonComponentProps {
     setAddressField : () => Promise<void>,

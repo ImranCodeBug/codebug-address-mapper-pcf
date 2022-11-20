@@ -1,7 +1,6 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import * as React from "react";
-import { Address, AddressMap, DynamicsEntity } from "./Models/EntityModel";
-import {AddressComponent, IAddressComponentProps } from "./AddressComponent";
+import { Address, DynamicsEntity } from "./Models/EntityModel";
 import { EntityRepository } from "./Repositories/EntityRepository";
 import MainComponent, { IMainComponentProps } from "./MainComponent";
 
