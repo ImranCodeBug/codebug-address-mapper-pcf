@@ -4,7 +4,8 @@ import { ResponseStatus } from './Models/ResponseModel';
 
 interface IButtonComponentProps {
     setAddressField : () => Promise<void>,
-    queryStatus : ResponseStatus | null   
+    queryStatus : ResponseStatus | null,
+    buttonLabelText : string   
 }
 
 const stackItemStyles : IStackItemStyles = {}
@@ -22,7 +23,7 @@ const ButtonComponent: React.FunctionComponent<IButtonComponentProps> = (props) 
   return (
     <StackItem styles={stackItemStyles}>
         <span>
-            <DefaultButton text="Set Address from Parent"  onClick={()=> buttonClick()} iconProps={contactInfo} checked={isRunning}>
+            <DefaultButton text={props.buttonLabelText} onClick={()=> buttonClick()} iconProps={contactInfo} checked={isRunning}>
                 {isRunning ? 
                     <Spinner size={SpinnerSize.medium} style={{color: 'white', marginRight : 2 }} />
                 : null}

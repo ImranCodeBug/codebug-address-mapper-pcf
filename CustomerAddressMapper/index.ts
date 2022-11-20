@@ -3,6 +3,7 @@ import * as React from "react";
 import { Address, AddressMap, DynamicsEntity } from "./Models/EntityModel";
 import {AddressComponent, IAddressComponentProps } from "./AddressComponent";
 import { EntityRepository } from "./Repositories/EntityRepository";
+import MainComponent, { IMainComponentProps } from "./MainComponent";
 
 export class CustomerAddressMapper implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
@@ -36,12 +37,15 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
      * @returns ReactElement root react element for the control
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {        
-        const props : IAddressComponentProps = this.ConstructProps(context);
-        return React.createElement(AddressComponent, props);
+        const props : IMainComponentProps = this.ConstructProps(context);
+        return React.createElement(MainComponent, props);
     }
 
-    private ConstructProps = (context : ComponentFramework.Context<IInputs>) =>{        
+    private ConstructProps = (context : ComponentFramework.Context<IInputs>) : IMainComponentProps =>{        
         const entityRepository = new EntityRepository(context.webAPI)
+ 
+        const buttonLabel = context.parameters.ButtonLabel.raw ? context.parameters.ButtonLabel.raw : "Set Address from Parent";
+        const showButton = context.parameters.ShowButton.raw === 'yes';
 
         const parentEntity : DynamicsEntity = {
             entityLogicalName : (<any>context).parameters.Customer.raw[0].LogicalName,
@@ -49,18 +53,11 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
             //entityId : '39269c3e-a55d-4eae-ae8d-3091818562d6'
         };
 
-        const childEntity : DynamicsEntity = {
-            entityLogicalName  : (<any>context).page.entityTypeName,
-            entityId : (<any>context).page.entityId
-        };
-
         return {
-            parentEntity : parentEntity,
-            childEntity : childEntity,            
-            showButton : (context.parameters.ShowButton.raw === 'yes'),
-            entityRepository : entityRepository,            
-            customerAddressMapper : this,
-            doSomething : this.updateAddressFields
+            parentEntity : parentEntity,            
+            showButton : showButton,
+            buttonLabelText : buttonLabel,
+            entityRepository : entityRepository
         }
     }
     

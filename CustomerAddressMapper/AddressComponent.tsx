@@ -11,9 +11,8 @@ import { ResponseStatus } from './Models/ResponseModel';
 export interface IAddressComponentProps {
   parentEntity: DynamicsEntity  
   showButton: boolean,
-  entityRepository: IEntityRepository, 
-  
- 
+  buttonLabelText : string,
+  entityRepository: IEntityRepository
 }
 
 const stackStyles: IStackStyles = {
@@ -23,8 +22,7 @@ const stackTokens: IStackTokens = {
 
 }
 
-export const AddressComponent: React.FunctionComponent<IAddressComponentProps> = (props) => {
-  
+export const AddressComponent: React.FunctionComponent<IAddressComponentProps> = (props) => { 
 
   const [queryStatus, setIsRunning] = useState<ResponseStatus | null>(null)
 
@@ -32,7 +30,7 @@ export const AddressComponent: React.FunctionComponent<IAddressComponentProps> =
 
   useEffect(() =>{    
     const executeSetAddressFromParent = async() =>{
-      if(!showButton){
+      if(!showButton && parentEntity){
         await setAddressFromParent();
       }
     }
@@ -51,7 +49,7 @@ export const AddressComponent: React.FunctionComponent<IAddressComponentProps> =
   return (
     <Stack styles={stackStyles} tokens={stackTokens}>
       {props.showButton ?
-        <ButtonComponent setAddressField={setAddressFromParent} queryStatus={queryStatus}></ButtonComponent>
+        <ButtonComponent setAddressField={setAddressFromParent} buttonLabelText={props.buttonLabelText} queryStatus={queryStatus}></ButtonComponent>
         : null}
 
       {queryStatus != null ?
