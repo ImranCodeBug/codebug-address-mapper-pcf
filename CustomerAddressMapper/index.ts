@@ -40,9 +40,8 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
         return React.createElement(AddressComponent, props);
     }
 
-    private ConstructProps = (context : ComponentFramework.Context<IInputs>) =>{
-        const addressFieldMaps = this.ConstructAddressMapFromContext(context)
-        const entityRepository = new EntityRepository(context.webAPI, addressFieldMaps)
+    private ConstructProps = (context : ComponentFramework.Context<IInputs>) =>{        
+        const entityRepository = new EntityRepository(context.webAPI)
 
         const parentEntity : DynamicsEntity = {
             entityLogicalName : (<any>context).parameters.Customer.raw[0].LogicalName,
