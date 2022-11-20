@@ -64,46 +64,7 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
             doSomething : this.updateAddressFields
         }
     }
-
-    private ConstructAddressMapFromContext = (context : ComponentFramework.Context<IInputs>) =>{
-        const addressFieldMaps : AddressMap = {}
-
-        if(context.parameters.Street1.raw){
-            addressFieldMaps.line1 = {schemaName : context.parameters.Street1.raw}
-        }
-
-        if(context.parameters.Street2.raw){
-            addressFieldMaps.line2 = {schemaName : context.parameters.Street2.raw}
-        }
-
-        if(context.parameters.Street3.raw){
-            addressFieldMaps.line3 = {schemaName : context.parameters.Street3.raw}
-        }
-
-        if(context.parameters.Postcode.raw){
-            addressFieldMaps.postcode = {schemaName : context.parameters.Postcode.raw}
-        }
-
-        if(context.parameters.County.raw){
-            addressFieldMaps.county = {schemaName : context.parameters.County.raw}
-        }
-
-        if(context.parameters.City.raw){
-            addressFieldMaps.city = {schemaName : context.parameters.City.raw}
-        }
-
-        if(context.parameters.Province.raw){
-            addressFieldMaps.province = {schemaName : context.parameters.Province.raw}
-        }
-
-        if(context.parameters.Country.raw){
-            addressFieldMaps.country = {schemaName : context.parameters.Country.raw}
-        }
-
-        return addressFieldMaps
-    }
-
-
+    
     public updateAddressFields = (address : Address) :void => {
         this._address = address;
         this.notifyOutputChanged();
