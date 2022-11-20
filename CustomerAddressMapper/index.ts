@@ -1,13 +1,13 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import * as React from "react";
-import { AddressMap, DynamicsEntity } from "./Models/EntityModel";
+import { Address, AddressMap, DynamicsEntity } from "./Models/EntityModel";
 import {AddressComponent, IAddressComponentProps } from "./AddressComponent";
 import { EntityRepository } from "./Repositories/EntityRepository";
 
 export class CustomerAddressMapper implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
     private notifyOutputChanged: () => void;
-    public _boundField : string;
+    private _address : Address
 
     /**
      * Empty constructor.
@@ -61,7 +61,7 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
             showButton : (context.parameters.ShowButton.raw === 'yes'),
             entityRepository : entityRepository,            
             customerAddressMapper : this,
-            doSomething : this.doSomething
+            doSomething : this.updateAddressFields
         }
     }
 
@@ -104,12 +104,23 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
     }
 
 
-    public doSomething = (bdFiled : string) :void => {
-        console.log(bdFiled)        
-        this._boundField = bdFiled;
+    public updateAddressFields = (address : Address) :void => {
+        this._address = address;
         this.notifyOutputChanged();
     }
     
+    public getOutputs(): IOutputs {
+        return{
+            Street1 : this._address.line1,
+            Street2 : this._address.line2,
+            Street3 : this._address.line3,
+            Postcode : this._address.postcode,
+            Province : this._address.province,
+            Country : this._address.country,
+            County : this._address.county
+        }
+    }
+
 
     /**
      * Called when the control is to be removed from the DOM tree. Controls should use this call for cleanup.
