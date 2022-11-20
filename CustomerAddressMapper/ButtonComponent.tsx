@@ -4,7 +4,7 @@ import { ResponseStatus } from './Models/ResponseModel';
 
 interface IButtonComponentProps {
     setAddressField : () => Promise<void>,
-    queryStatus : ResponseStatus | null,
+    isRunning : boolean,
     buttonLabelText : string   
 }
 
@@ -12,9 +12,7 @@ const stackItemStyles : IStackItemStyles = {}
 const contactInfo: IIconProps = { iconName: 'SearchAndApps' };
 
 const ButtonComponent: React.FunctionComponent<IButtonComponentProps> = (props) => {
-    const {setAddressField, queryStatus} = props;
-
-    const isRunning = (queryStatus != null && queryStatus == ResponseStatus.Running)
+    const {setAddressField, isRunning } = props;    
 
     const buttonClick = async() =>{        
         await setAddressField();
