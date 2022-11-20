@@ -1,3 +1,5 @@
+import { Address } from "./EntityModel"
+
 export enum ResponseStatus {
     Success = 0, 
     Error = 1, 
@@ -7,5 +9,6 @@ export enum ResponseStatus {
 
 export type QueryReponse={
     status : ResponseStatus,
-    errorText? : string
+    errorText? : string,
+    address ? : Address
 } 
