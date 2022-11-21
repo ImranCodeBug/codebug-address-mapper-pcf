@@ -1,6 +1,6 @@
 import { initializeIcons } from '@fluentui/react';
 import * as React from 'react';
-import { AddressComponent } from './AddressComponent';
+import { AddressContainerComponent } from './AddressContainerComponent';
 import { DynamicsEntity } from './Models/EntityModel';
 import { IEntityRepository } from './Repositories/IEntityRepository';
 
@@ -17,8 +17,8 @@ const MainComponent: React.FunctionComponent<IMainComponentProps> = (props) => {
     
     return (
         <>
-            {parentEntity ? <AddressComponent parentEntity={parentEntity!} showButton={showButton} 
-            entityRepository={entityRepository} buttonLabelText={buttonLabelText}></AddressComponent> : null}
+            {parentEntity ? <AddressContainerComponent parentEntity={parentEntity!} showButton={showButton} 
+            entityRepository={entityRepository} buttonLabelText={buttonLabelText}></AddressContainerComponent> : null}
         </>
     )
 };

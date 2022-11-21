@@ -1,4 +1,5 @@
-import { DefaultButton, IIconProps, IStackItemStyles, Spinner, SpinnerSize, StackItem } from '@fluentui/react';
+import { DefaultButton, IIconProps, IStackItemStyles, 
+    Spinner, SpinnerSize, StackItem } from '@fluentui/react';
 import * as React from 'react';
 
 interface IButtonComponentProps {

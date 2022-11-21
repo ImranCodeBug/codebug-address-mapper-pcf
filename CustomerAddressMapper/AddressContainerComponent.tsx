@@ -6,6 +6,7 @@ import { IEntityRepository } from './Repositories/IEntityRepository';
 import { useEffect, useState } from 'react';
 import InformationComponent from './InformationComponent';
 import { ResponseStatus } from './Models/ResponseModel';
+import AddressDetailsComponent from './AddressDetailsComponent';
 
 
 export interface IAddressComponentProps {
@@ -22,7 +23,7 @@ const stackTokens: IStackTokens = {
 
 }
 
-export const AddressComponent: React.FunctionComponent<IAddressComponentProps> = (props) => { 
+export const AddressContainerComponent: React.FunctionComponent<IAddressComponentProps> = (props) => { 
   const [responseStatus, setResponseStatus] = useState<ResponseStatus | null>(null)
   const [queryIsRunning, setQueryRunning] = useState<boolean>(false);
   const [customerAddress, setCustomerAddress] = useState<Address | null | undefined>(null);
@@ -65,6 +66,8 @@ export const AddressComponent: React.FunctionComponent<IAddressComponentProps> =
       {responseStatus != null ?
         <InformationComponent queryStatus={responseStatus!}></InformationComponent>
         : null}
+
+        <AddressDetailsComponent></AddressDetailsComponent>
     </Stack>
   );
 };
