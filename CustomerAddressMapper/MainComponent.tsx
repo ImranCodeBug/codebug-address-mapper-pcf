@@ -8,17 +8,19 @@ export interface IMainComponentProps {
     parentEntity?: DynamicsEntity
     showButton: boolean
     buttonLabelText: string
+    showCustomFields : boolean
     entityRepository: IEntityRepository
 }
 
 const MainComponent: React.FunctionComponent<IMainComponentProps> = (props) => {
     initializeIcons();
-    const { parentEntity, showButton, buttonLabelText, entityRepository } = props;
+    const { parentEntity, showButton, buttonLabelText, showCustomFields, entityRepository } = props;
     
     return (
         <>
             {parentEntity ? <AddressContainerComponent parentEntity={parentEntity!} showButton={showButton} 
-            entityRepository={entityRepository} buttonLabelText={buttonLabelText}></AddressContainerComponent> : null}
+            entityRepository={entityRepository} showCustomAddressFields={showCustomFields} 
+            buttonLabelText={buttonLabelText}></AddressContainerComponent> : null}
         </>
     )
 };

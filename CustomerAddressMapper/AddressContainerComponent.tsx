@@ -12,6 +12,7 @@ import AddressDetailsComponent from './AddressDetailsComponent';
 export interface IAddressComponentProps {
   parentEntity: DynamicsEntity  
   showButton: boolean,
+  showCustomAddressFields : boolean
   buttonLabelText : string,
   entityRepository: IEntityRepository
 }
@@ -27,7 +28,7 @@ export const AddressContainerComponent: React.FunctionComponent<IAddressComponen
   const [responseStatus, setResponseStatus] = useState<ResponseStatus | null>(null)
   const [queryIsRunning, setQueryRunning] = useState<boolean>(false);
   const [customerAddress, setCustomerAddress] = useState<Address | null | undefined>(null);
-  const { parentEntity, showButton, entityRepository, } = props  
+  const { parentEntity, showButton, showCustomAddressFields, entityRepository, } = props  
 
   useEffect(() =>{    
     const executeSetAddressFromParent = async() =>{
@@ -66,8 +67,10 @@ export const AddressContainerComponent: React.FunctionComponent<IAddressComponen
       {responseStatus != null ?
         <InformationComponent queryStatus={responseStatus!}></InformationComponent>
         : null}
-
+      
+      {showCustomAddressFields && customerAddress ? 
         <AddressDetailsComponent></AddressDetailsComponent>
+        :null}
     </Stack>
   );
 };

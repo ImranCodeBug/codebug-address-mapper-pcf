@@ -45,17 +45,19 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
  
         const buttonLabel = context.parameters.ButtonLabel.raw ? context.parameters.ButtonLabel.raw : "Set Address from Parent";
         const showButton = context.parameters.ShowButton.raw === 'yes';
+        const showCustomAddressFields = context.parameters.ShowAddressFields.raw == 'yes';
 
         const parentEntity : DynamicsEntity = {
             entityLogicalName : (<any>context).parameters.Customer.raw[0].LogicalName,
-            //entityId : (<any>context).parameters.Customer.raw[0].Id._formattedGuid
-            entityId : '39269c3e-a55d-4eae-ae8d-3091818562d6'
+            entityId : (<any>context).parameters.Customer.raw[0].Id._formattedGuid
+            //entityId : '39269c3e-a55d-4eae-ae8d-3091818562d6'
         };
 
         return {
             parentEntity : parentEntity,            
             showButton : showButton,
             buttonLabelText : buttonLabel,
+            showCustomFields : showCustomAddressFields,
             entityRepository : entityRepository
         }
     }
@@ -72,6 +74,7 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
             Street3 : this._address.line3,
             Postcode : this._address.postcode,
             Province : this._address.province,
+            City : this._address.city,
             Country : this._address.country,
             County : this._address.county
         }
