@@ -14,7 +14,7 @@
     of-type="Lookup.Customer" usage="bound" required="true" />
    
     <property name="ShowButton" display-name-key="Trigger From Button" 
-      description-key="Show button to pull the address" 
+      description-key="Show a button to pull the address" 
       of-type="Enum" usage="input" required="true">
       <value name="Yes" display-name-key="Show Button" description-key="Shows a button to trigger the pull" default="true">yes</value>
       <value name="No" display-name-key="Do not show button" description-key="Does not show any button. Automatically pull address on change" >no</value>
@@ -23,8 +23,8 @@
     <property name="ShowAddressFields" display-name-key="Show Address Fields" 
       description-key="Show readonly fields for customer address" 
       of-type="Enum" usage="input" required="true">
-      <value name="Yes" display-name-key="Yes" description-key="Shows the address field" default="true">yes</value>
-      <value name="No" display-name-key="No" description-key="Does not show the fields. Address are outputed into the form" >no</value>
+      <value name="Yes" display-name-key="Yes" description-key="Shows the address field">yes</value>
+      <value name="No" display-name-key="No" description-key="Does not show the fields. Address are outputed into the form" default="false">no</value>
     </property>    
 
 
