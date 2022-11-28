@@ -14,6 +14,17 @@ export interface IMainComponentProps {
     updateAddress: (customerAddress: Address) => void
 }
 
+const cleanAddress : Address = {
+    line1 : undefined,
+    line2 : undefined,
+    line3 : undefined,
+    postcode : undefined,
+    city : undefined, 
+    county : undefined,
+    province : undefined,
+    country : undefined
+}
+
 const MainComponent: React.FunctionComponent<IMainComponentProps> = (props) => {
     initializeIcons();
     const { parentEntity, showButton, buttonLabelText, showCustomFields, entityRepository, updateAddress } = props;
@@ -36,6 +47,9 @@ const MainComponent: React.FunctionComponent<IMainComponentProps> = (props) => {
         if (customerAddress) {
             updateAddress(customerAddress);
         }
+        else{
+            updateAddress(cleanAddress);
+        }
     }, [customerAddress])
 
     const getAddressFromParent = async () => {
@@ -49,7 +63,6 @@ const MainComponent: React.FunctionComponent<IMainComponentProps> = (props) => {
         }
         setCustomerAddress(response.address)
     }
-
 
     return (
         <>
