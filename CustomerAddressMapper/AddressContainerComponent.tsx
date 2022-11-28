@@ -14,7 +14,8 @@ export interface IAddressComponentProps {
   getAddressFromParent : () => Promise<void>,
   queryIsRunning : boolean,
   responseStatus : ResponseStatus | null,
-  customerAddress : Address | null | undefined   
+  customerAddress : Address | null | undefined,
+  clearAddress : () => void
 }
 
 const stackStyles: IStackStyles = {
@@ -26,7 +27,7 @@ const stackTokens: IStackTokens = {
 
 export const AddressContainerComponent: React.FunctionComponent<IAddressComponentProps> = (props) => { 
   const {showButton, showCustomAddressFields, buttonLabelText, getAddressFromParent, 
-    queryIsRunning, responseStatus, customerAddress } = props;
+    queryIsRunning, responseStatus, customerAddress, clearAddress } = props;
   
   return (
     <Stack styles={stackStyles} tokens={stackTokens}>
@@ -41,7 +42,7 @@ export const AddressContainerComponent: React.FunctionComponent<IAddressComponen
         : null}
       
       {showCustomAddressFields && customerAddress ? 
-        <AddressDetailsComponent address={customerAddress}></AddressDetailsComponent>
+        <AddressDetailsComponent address={customerAddress} clearAddress={clearAddress}></AddressDetailsComponent>
         :null}
     </Stack>
   );

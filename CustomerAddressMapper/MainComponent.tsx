@@ -79,7 +79,8 @@ const MainComponent: React.FunctionComponent<IMainComponentProps> = (props) => {
                 getAddressFromParent={getAddressFromParent}
                 queryIsRunning={queryIsRunning}
                 responseStatus={responseStatus}
-                customerAddress={customerAddress}>
+                customerAddress={customerAddress}
+                clearAddress={() => setCustomerAddress(null)}>
             </AddressContainerComponent>
         </>
     )
