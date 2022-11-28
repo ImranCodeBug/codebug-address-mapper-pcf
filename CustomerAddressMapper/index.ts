@@ -58,7 +58,8 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
             showButton : showButton,
             buttonLabelText : buttonLabel,
             showCustomFields : showCustomAddressFields,
-            entityRepository : entityRepository
+            entityRepository : entityRepository,
+            updateAddress : this.updateAddressFields
         }
     }
     

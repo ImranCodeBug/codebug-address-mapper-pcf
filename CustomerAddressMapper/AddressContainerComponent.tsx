@@ -15,6 +15,7 @@ export interface IAddressComponentProps {
   showCustomAddressFields : boolean
   buttonLabelText : string,
   entityRepository: IEntityRepository
+  updateAddress : (customerAddress : Address) => void
 }
 
 const stackStyles: IStackStyles = {
@@ -28,7 +29,7 @@ export const AddressContainerComponent: React.FunctionComponent<IAddressComponen
   const [responseStatus, setResponseStatus] = useState<ResponseStatus | null>(null)
   const [queryIsRunning, setQueryRunning] = useState<boolean>(false);
   const [customerAddress, setCustomerAddress] = useState<Address | null | undefined>(null);
-  const { parentEntity, showButton, showCustomAddressFields, entityRepository, } = props  
+  const { parentEntity, showButton, showCustomAddressFields, buttonLabelText, entityRepository, updateAddress} = props  
 
   useEffect(() =>{    
     const executeSetAddressFromParent = async() =>{
@@ -41,7 +42,7 @@ export const AddressContainerComponent: React.FunctionComponent<IAddressComponen
 
   useEffect(() => {
     if(customerAddress){
-      // call the address update method in the index
+      updateAddress(customerAddress);
     }    
   },[customerAddress])
   
