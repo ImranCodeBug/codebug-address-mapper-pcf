@@ -45,14 +45,16 @@ const MainComponent: React.FunctionComponent<IMainComponentProps> = (props) => {
 
     React.useEffect(() => {
         if(parentEntity === null || parentEntity === undefined){
-            updateAddress(cleanAddress);
-        }
-        
+            setCustomerAddress(null);            
+        }        
     }, [parentEntity])
 
     React.useEffect(() => {
         if (customerAddress) {
             updateAddress(customerAddress);
+        }
+        else{
+            updateAddress(cleanAddress);
         }
     }, [customerAddress])
 
