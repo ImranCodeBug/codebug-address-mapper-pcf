@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Address } from './Models/EntityModel';
 
 interface IAddressDetailsComponentProps {
-    //address : Address
+    address : Address
 }
 
 const stackTokens = { childrenGap: 10 };

@@ -69,7 +69,7 @@ export const AddressContainerComponent: React.FunctionComponent<IAddressComponen
         : null}
       
       {showCustomAddressFields && customerAddress ? 
-        <AddressDetailsComponent></AddressDetailsComponent>
+        <AddressDetailsComponent address={customerAddress}></AddressDetailsComponent>
         :null}
     </Stack>
   );
