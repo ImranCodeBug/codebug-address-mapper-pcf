@@ -47,11 +47,10 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
         const showButton = context.parameters.ShowButton.raw === 'yes';
         const showCustomAddressFields = context.parameters.ShowAddressFields.raw == 'yes';
 
-        const parentEntity : DynamicsEntity = {
+        const parentEntity : DynamicsEntity | null = (<any>context).parameters.Customer ?  {
             entityLogicalName : (<any>context).parameters.Customer.raw[0].LogicalName,
-            entityId : (<any>context).parameters.Customer.raw[0].Id._formattedGuid
-            //entityId : '39269c3e-a55d-4eae-ae8d-3091818562d6'
-        };
+            entityId : (<any>context).parameters.Customer.raw[0].Id._formattedGuid            
+        } : null;
 
         return {
             parentEntity : parentEntity,            
