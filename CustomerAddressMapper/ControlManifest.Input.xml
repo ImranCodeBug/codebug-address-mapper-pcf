@@ -24,7 +24,7 @@
       description-key="Show readonly fields for customer address" 
       of-type="Enum" usage="input" required="true">
       <value name="Yes" display-name-key="Yes" description-key="Shows the address field">yes</value>
-      <value name="No" display-name-key="No" description-key="Does not show the fields. Address are outputed into the form" default="false">no</value>
+      <value name="No" display-name-key="No" description-key="Does not show the fields. Address are outputed into the form" default="true">no</value>
     </property>    
 
 
