@@ -25,16 +25,12 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: Npm@1  
-  inputs:
-    command: 'custom'
-    customCommand: 'run test:ci'
-  displayName: 'Running Test'
+- script: |    
+    npm run test
+  displayName: 'Running test'
 
-- task: PublishTestResults@2
-  displayName: 'supply npm test results to pipelines'
-  condition: succeededOrFailed() # because otherwise we won't know what tests failed
+- task: PublishCodeCoverageResults@1
   inputs:
-    testResultsFiles: 'CustomerAddressMapper/__tests__/junit.xml'
-
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml'
 
