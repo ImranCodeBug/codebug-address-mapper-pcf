@@ -21,6 +21,9 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- script: |
-    npm run test
-  displayName: 'Runnig test'
+- task: Npm@1
+  displayName: npm run test
+  inputs:
+    command: 'custom'
+    workingDir: 'out/client-app'
+    customCommand: 'run test:ci'
