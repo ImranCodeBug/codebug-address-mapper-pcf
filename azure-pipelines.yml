@@ -56,9 +56,10 @@ steps:
     repositoryName: '$(Build.Repository.Name)'
     action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'gitTag'
+    tagSource: 'userSpecifiedTag'
+    tag: 'Codebug-$(Build.BuildNumber)'
     title: 'Release Main Branch'
-    assets: '$(Build.ArtifactStagingDirectory)/*.zip'
+    assets: '$(Build.ArtifactStagingDirectory)/drop/*.zip'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
 
