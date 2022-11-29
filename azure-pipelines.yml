@@ -21,15 +21,14 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: Npm@1
-  displayName: npm run test
+- task: Npm@1  
   inputs:
     command: 'custom'
-    workingDir: 'out/'
     customCommand: 'run test:ci'
+  displayName: 'Running Test'
 
 - task: PublishTestResults@2
   displayName: 'supply npm test results to pipelines'
   condition: succeededOrFailed() # because otherwise we won't know what tests failed
   inputs:
-    testResultsFiles: 'out/junit.xml'
+    testResultsFiles: '__tests__/junit.xml'
