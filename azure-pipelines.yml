@@ -59,7 +59,7 @@ steps:
     tagSource: 'userSpecifiedTag'
     tag: 'Codebug-$(Build.BuildNumber)'
     title: 'Release Main Branch'
-    assets: '$(Build.ArtifactStagingDirectory)/drop/*.zip'
+    assets: '$(System.DefaultWorkingDirectory)/Solutions/CodebugCustomerAddressMapper/bin/Debug/*.zip'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
 
