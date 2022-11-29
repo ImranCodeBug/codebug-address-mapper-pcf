@@ -41,5 +41,10 @@ steps:
     workingDirectory: 'Solutions/CodebugCustomerAddressMapper/'
   displayName: 'Building Solution'
 
-
+- task: PublishBuildArtifacts@1
+  displayName: 'Publishing Artifact'
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/Solutions/CodebugCustomerAddressMapper/'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 
