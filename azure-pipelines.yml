@@ -31,4 +31,4 @@ steps:
   displayName: 'supply npm test results to pipelines'
   condition: succeededOrFailed() # because otherwise we won't know what tests failed
   inputs:
-    testResultsFiles: '__tests__/junit.xml'
+    testResultsFiles: 'CustomerAddressMapper/__tests__/junit.xml'
