@@ -27,3 +27,9 @@ steps:
     command: 'custom'
     workingDir: 'out/'
     customCommand: 'run test:ci'
+
+- task: PublishTestResults@2
+  displayName: 'supply npm test results to pipelines'
+  condition: succeededOrFailed() # because otherwise we won't know what tests failed
+  inputs:
+    testResultsFiles: 'out/junit.xml'
