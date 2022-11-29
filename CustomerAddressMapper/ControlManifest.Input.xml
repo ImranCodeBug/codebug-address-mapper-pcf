@@ -12,13 +12,21 @@
     <property name="Customer" display-name-key="Customer" 
     description-key="Bind the customer field from which the address fields will be brought" 
     of-type="Lookup.Customer" usage="bound" required="true" />
-
+   
     <property name="ShowButton" display-name-key="Trigger From Button" 
-      description-key="Show button to pull the address" 
+      description-key="Show a button to pull the address" 
       of-type="Enum" usage="input" required="true">
       <value name="Yes" display-name-key="Show Button" description-key="Shows a button to trigger the pull" default="true">yes</value>
-      <value name="No" display-name-key="Do not show button" description-key="Does not show any button" >no</value>
-      </property>    
+      <value name="No" display-name-key="Do not show button" description-key="Does not show any button. Automatically pull address on change" >no</value>
+    </property>
+
+    <property name="ShowAddressFields" display-name-key="Show Address Fields" 
+      description-key="Show readonly fields for customer address" 
+      of-type="Enum" usage="input" required="true">
+      <value name="Yes" display-name-key="Yes" description-key="Shows the address field">yes</value>
+      <value name="No" display-name-key="No" description-key="Does not show the fields. Address are outputed into the form" default="true">no</value>
+    </property>    
+
 
     <property name="ButtonLabel" display-name-key="Button Label" 
     description-key="Label in the button" 
@@ -26,35 +34,35 @@
 
     <property name="Street1" display-name-key="Street 1" 
     description-key="Schema name of the child entities Street 1 field" 
-    of-type="SingleLine.Text" usage="input" required="false" />
+    of-type="SingleLine.Text" usage="bound" required="false" />
 
     <property name="Street2" display-name-key="Street 2" 
     description-key="Schema name of the child entities Street 2 field" 
-    of-type="SingleLine.Text" usage="input" required="false" />
+    of-type="SingleLine.Text" usage="bound" required="false" />
 
     <property name="Street3" display-name-key="Street 3" 
     description-key="Schema name of the child entities Street 3 field" 
-    of-type="SingleLine.Text" usage="input" required="false" />
+    of-type="SingleLine.Text" usage="bound" required="false" />
 
     <property name="Postcode" display-name-key="Postcode" 
     description-key="Schema name of the child entities Postcode field" 
-    of-type="SingleLine.Text" usage="input" required="false" />
+    of-type="SingleLine.Text" usage="bound" required="false" />
 
     <property name="City" display-name-key="City" 
     description-key="Schema name of the child entities City field" 
-    of-type="SingleLine.Text" usage="input" required="false" />
+    of-type="SingleLine.Text" usage="bound" required="false" />
 
     <property name="County" display-name-key="County" 
     description-key="Schema name of the child entities County field" 
-    of-type="SingleLine.Text" usage="input" required="false" />
+    of-type="SingleLine.Text" usage="bound" required="false" />
 
     <property name="Province" display-name-key="Province" 
     description-key="Schema name of the child entities Province field" 
-    of-type="SingleLine.Text" usage="input" required="false" />
+    of-type="SingleLine.Text" usage="bound" required="false" />
 
     <property name="Country" display-name-key="Country" 
     description-key="Schema name of the child entities Country field" 
-    of-type="SingleLine.Text" usage="input" required="false" />
+    of-type="SingleLine.Text" usage="bound" required="false" />
 
 
     <!--

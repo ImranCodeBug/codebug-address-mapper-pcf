@@ -7,19 +7,15 @@ export interface IInformationComponentProps {
     queryStatus : ResponseStatus
 }
 
-
-
-const stackItemStyles : IStackItemStyles = {
-    
+const stackItemStyles : IStackItemStyles = {    
     
 }
 
 const stackItemToken : IStackItemTokens = {
+
 }
 
-
-const getIconDetails = (queryStatus : ResponseStatus) => {
-    console.log(queryStatus)
+const getIconDetails = (queryStatus : ResponseStatus) => {    
     switch (queryStatus){
         case ResponseStatus.Error : {
             return {
@@ -30,21 +26,12 @@ const getIconDetails = (queryStatus : ResponseStatus) => {
             }
         }
 
-        case ResponseStatus.Success : {
+        default : {
             return {
                 iconName : 'SkypeCheck',
                 areaLabel : 'Success',
                 iconStyle : {color : 'Green', marginRight: 3, fontSize : FontSizes.size16},
                 text : `Successfully updated the fields at ${new Date().toLocaleString()}`
-            }
-        }
-
-        default : {
-            return {
-                iconName : 'Warning',
-                areaLabel : 'Warning',
-                iconStyle : {color : '#FFB900', marginRight: 3, fontSize : FontSizes.size16},
-                text : `Updating address fields..`
             }
         }
     }
@@ -67,9 +54,6 @@ const InformationComponent = (props: IInformationComponentProps) => {
         </div>
     </StackItem>    
   )
-
-    
-  
 }
 
 export default InformationComponent

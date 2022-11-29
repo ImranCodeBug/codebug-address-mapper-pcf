@@ -1,17 +1,19 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import * as React from "react";
-import { AddressMap, DynamicsEntity } from "./Models/EntityModel";
-import {AddressComponent, IAddressComponentProps } from "./AddressComponent";
+import { Address, DynamicsEntity } from "./Models/EntityModel";
 import { EntityRepository } from "./Repositories/EntityRepository";
+import MainComponent, { IMainComponentProps } from "./MainComponent";
 
 export class CustomerAddressMapper implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
     private notifyOutputChanged: () => void;
+    private _address : Address
 
     /**
      * Empty constructor.
      */
-    constructor() { }
+    constructor() {         
+    }
 
     /**
      * Used to initialize the control instance. Controls can kick off remote server calls and other initialization actions here.
@@ -34,78 +36,50 @@ export class CustomerAddressMapper implements ComponentFramework.ReactControl<II
      * @returns ReactElement root react element for the control
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {        
-        const props : IAddressComponentProps = this.ConstructProps(context);
-        return React.createElement(AddressComponent, props);
+        const props : IMainComponentProps = this.ConstructProps(context);
+        return React.createElement(MainComponent, props);
     }
 
-    private ConstructProps = (context : ComponentFramework.Context<IInputs>) =>{
-        const addressFieldMaps = this.ConstructAddressMapFromContext(context)
-        const entityRepository = new EntityRepository(context.webAPI, addressFieldMaps)
+    private ConstructProps = (context : ComponentFramework.Context<IInputs>) : IMainComponentProps =>{        
+        const entityRepository = new EntityRepository(context.webAPI)
+ 
+        const buttonLabel = context.parameters.ButtonLabel.raw ? context.parameters.ButtonLabel.raw : "Set Address from Parent";
+        const showButton = context.parameters.ShowButton.raw === 'yes';
+        const showCustomAddressFields = context.parameters.ShowAddressFields.raw == 'yes';
 
-        const parentEntity : DynamicsEntity = {
+        const parentEntity : DynamicsEntity | null = (<any>context).parameters.Customer.raw[0] ?  {
             entityLogicalName : (<any>context).parameters.Customer.raw[0].LogicalName,
-            entityId : (<any>context).parameters.Customer.raw[0].Id._formattedGuid
-            //entityId : '39269c3e-a55d-4eae-ae8d-3091818562d6'
-        };
-
-        const childEntity : DynamicsEntity = {
-            entityLogicalName  : (<any>context).page.entityTypeName,
-            entityId : (<any>context).page.entityId
-        };
+            entityId : (<any>context).parameters.Customer.raw[0].Id._formattedGuid            
+        } : null;
 
         return {
-            parentEntity : parentEntity,
-            childEntity : childEntity,            
-            showButton : true,
-            entityRepository : entityRepository
+            parentEntity : parentEntity,            
+            showButton : showButton,
+            buttonLabelText : buttonLabel,
+            showCustomFields : showCustomAddressFields,
+            entityRepository : entityRepository,
+            updateAddress : this.updateAddressFields
         }
     }
-
-    private ConstructAddressMapFromContext = (context : ComponentFramework.Context<IInputs>) =>{
-        const addressFieldMaps : AddressMap = {}
-
-        if(context.parameters.Street1.raw){
-            addressFieldMaps.line1 = {schemaName : context.parameters.Street1.raw}
-        }
-
-        if(context.parameters.Street2.raw){
-            addressFieldMaps.line2 = {schemaName : context.parameters.Street2.raw}
-        }
-
-        if(context.parameters.Street3.raw){
-            addressFieldMaps.line3 = {schemaName : context.parameters.Street3.raw}
-        }
-
-        if(context.parameters.Postcode.raw){
-            addressFieldMaps.postcode = {schemaName : context.parameters.Postcode.raw}
-        }
-
-        if(context.parameters.County.raw){
-            addressFieldMaps.county = {schemaName : context.parameters.County.raw}
-        }
-
-        if(context.parameters.City.raw){
-            addressFieldMaps.city = {schemaName : context.parameters.City.raw}
-        }
-
-        if(context.parameters.Province.raw){
-            addressFieldMaps.province = {schemaName : context.parameters.Province.raw}
-        }
-
-        if(context.parameters.Country.raw){
-            addressFieldMaps.country = {schemaName : context.parameters.Country.raw}
-        }
-
-        return addressFieldMaps
+    
+    public updateAddressFields = (address : Address) :void => {
+        this._address = address;
+        this.notifyOutputChanged();
     }
-
-    /**
-     * It is called by the framework prior to a control receiving new data.
-     * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
-     */
+    
     public getOutputs(): IOutputs {
-        return { };
+        return{
+            Street1 : this._address.line1,
+            Street2 : this._address.line2,
+            Street3 : this._address.line3,
+            Postcode : this._address.postcode,
+            Province : this._address.province,
+            City : this._address.city,
+            Country : this._address.country,
+            County : this._address.county
+        }
     }
+
 
     /**
      * Called when the control is to be removed from the DOM tree. Controls should use this call for cleanup.
