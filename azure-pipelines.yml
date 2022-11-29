@@ -25,5 +25,5 @@ steps:
   displayName: npm run test
   inputs:
     command: 'custom'
-    workingDir: 'out/client-app'
+    workingDir: 'out/'
     customCommand: 'run test:ci'
