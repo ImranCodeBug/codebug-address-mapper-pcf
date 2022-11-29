@@ -30,8 +30,7 @@ describe('Entity Repository', () =>{
         "address1_composite": "Konrad-Trey St 1000\r\nDukes\r\n\r\n85716 Munich\r\nGermany"
     }
 
-    beforeAll(() => {
-    
+    beforeAll(() => {    
         _webApi = {
             createRecord : jest.fn(),
             deleteRecord : jest.fn(),
@@ -39,8 +38,12 @@ describe('Entity Repository', () =>{
             retrieveRecord : jest.fn(),
             updateRecord : jest.fn()            
         }
-
     })
+
+    beforeEach(() => {
+        console.error = jest.fn()
+        console.error('you cant see me')
+      })
 
     test('initialized', () =>{
         let entityRepository = new EntityRepository(_webApi);
