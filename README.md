@@ -7,7 +7,7 @@ the funtionality can be triggered from a button within the control or if needed 
 ### With Custom Address Form
 ![Custom Address Form](Images/ControlWithAddress.png)
 
-### Without Custom Address Form but With a Button
+### Without Custom Address Form but with a Button
 ![No Address form with button](Images/ControlWithMapping.png)
 
 
