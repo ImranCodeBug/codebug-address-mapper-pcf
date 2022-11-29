@@ -4,8 +4,9 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 # this runs unit tests for pcf and publishes the test result in to azure
-# to use this feature you need to using jest-junit
-# follow the link here https://blog.johnnyreilly.com/2020/12/30/azure-pipelines-meet-jest
+# to use this feature you need to using jest-junit / Covbertura.
+# follow the link here jest-junit https://blog.johnnyreilly.com/2020/12/30/azure-pipelines-meet-jest
+# i have used cobertura here as this project is much simpler https://dzeyelid.medium.com/check-code-coverage-with-jest-on-azure-devops-548b80d29d3
 
 trigger:
 - main
@@ -33,4 +34,12 @@ steps:
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    workingDirectory: 'Solutions/CodebugCustomerAddressMapper/'
+  displayName: 'Building Solution'
+
+
 
