@@ -31,6 +31,7 @@ steps:
   displayName: 'Running test'
 
 - task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage result'
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml'
@@ -44,7 +45,7 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publishing Artifact'
   inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/Solutions/CodebugCustomerAddressMapper/'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/Solutions/CodebugCustomerAddressMapper/bin/Debug/*'
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
