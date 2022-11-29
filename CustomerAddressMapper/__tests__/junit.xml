@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="0.506">
+  <testsuite name="CustomerAddressMapper\__tests__\Repositories\EntityRepository.test.ts" errors="0" failures="0" skipped="0" timestamp="2022-11-29T18:47:51" time="0.449" tests="3">
+    <testcase classname="Entity Repository initialized" name="Entity Repository initialized" time="0.002">
+    </testcase>
+    <testcase classname="Entity Repository When parent has data it will be succeeded" name="Entity Repository When parent has data it will be succeeded" time="0">
+    </testcase>
+    <testcase classname="Entity Repository When it fails to execute it will have an error" name="Entity Repository When it fails to execute it will have an error" time="0">
+    </testcase>
+  </testsuite>
+</testsuites>

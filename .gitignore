@@ -12,5 +12,3 @@
 # msbuild output directories
 **/bin
 **/obj
-
-**/junit.xml

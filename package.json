@@ -42,7 +42,7 @@
   },
   "jest-junit": {
     "suiteNameTemplate": "{filepath}",
-    "outputDirectory": ".",
+    "outputDirectory": "./CustomerAddressMapper/__tests__",
     "outputName": "junit.xml"
   }
 }
