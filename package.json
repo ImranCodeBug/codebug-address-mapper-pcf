@@ -8,7 +8,7 @@
     "rebuild": "pcf-scripts rebuild",
     "start": "pcf-scripts start",
     "refreshTypes": "pcf-scripts refreshTypes",
-    "test": "jest",
+    "test": "jest --coverage --coverageReporters=cobertura",
     "test:ci": "npm run test -- --watchAll=false --reporters=default --reporters=jest-junit"
   },
   "dependencies": {
