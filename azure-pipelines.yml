@@ -9,6 +9,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: dotnet build
-  workingDirectory: Solutions/CodebugCustomerAddressMapper
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    workingDirectory: 'Solutions/CodebugCustomerAddressMapper/'
