@@ -21,7 +21,6 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    workingDirectory: 'Solutions/CodebugCustomerAddressMapper/'
+- script: |
+    npm run test
+  displayName: 'Runnig test'
