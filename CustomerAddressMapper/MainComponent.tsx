@@ -62,12 +62,13 @@ const MainComponent: React.FunctionComponent<IMainComponentProps> = (props) => {
         setQueryRunning(true)
 
         const response = await entityRepository.GetAddressValueFromParent(parentEntity!)
-
-        if (response) {
-            setQueryRunning(false);
-            setResponseStatus(response.status);
+        
+        setQueryRunning(false);
+        setResponseStatus(response.status);
+        
+        if(response.address){
+            setCustomerAddress(response.address)
         }
-        setCustomerAddress(response.address)
     }
 
     return (
