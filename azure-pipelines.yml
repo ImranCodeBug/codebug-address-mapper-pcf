@@ -8,8 +8,8 @@
 # follow the link here jest-junit https://blog.johnnyreilly.com/2020/12/30/azure-pipelines-meet-jest
 # i have used cobertura here as this project is much simpler https://dzeyelid.medium.com/check-code-coverage-with-jest-on-azure-devops-548b80d29d3
 
-trigger:
-- main
+trigger: none
+#- main
 
 pool:
   vmImage: ubuntu-latest
